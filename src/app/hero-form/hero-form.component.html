@@ -1,0 +1,140 @@
+<div class="container">
+  <div [hidden]="submitted">
+    <h1>Create your hero</h1>
+    <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+      <div class="form-group">
+        <label for="name">Nama</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          required
+          [(ngModel)]="model.name"
+          name="name"
+          #name="ngModel"
+        />
+        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+          Nama perlu di isi
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="kelas">Kelas</label>
+        <select
+          class="form-control"
+          id="kelas"
+          required
+          [(ngModel)]="model.kelas"
+          name="kelas"
+        >
+          <option *ngFor="let pow of kelas" [value]="pow">{{ pow }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="power">Kekuatan</label>
+        <select
+          class="form-control"
+          id="power"
+          required
+          [(ngModel)]="model.power"
+          name="power"
+          #power="ngModel"
+        >
+          <option *ngFor="let pow of powers" [value]="pow">{{ pow }}</option>
+        </select>
+        <div
+          [hidden]="power.valid || power.pristine"
+          class="alert alert-danger"
+        >
+          Kekuatan perlu di isi
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="kelamin">Kelamin</label>
+        <select
+          class="form-control"
+          id="kelamin"
+          required
+          [(ngModel)]="model.kelamin"
+          name="kelamin"
+        >
+          <option *ngFor="let pow of kelamin" [value]="pow">{{ pow }}</option>
+        </select>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-success"
+        [disabled]="!heroForm.form.valid"
+      >
+        Submit
+      </button>
+      <button
+        type="button"
+        class="btn btn-default"
+        (click)="newHero(); heroForm.reset()"
+      >
+        Reset
+      </button>
+
+      <!-- NOT SHOWN IN DOCS -->
+      <div>
+        <hr />
+        Name via form.controls = {{ showFormControls(heroForm) }}
+      </div>
+      <!-- - -->
+    </form>
+  </div>
+
+  <div [hidden]="!submitted">
+    <h2>You submitted the following:</h2>
+    <div class="row">
+      <div class="col-xs-3">Nama</div>
+      <div class="col-xs-9 pull-left">{{ model.name }}</div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-3">Kelas</div>
+      <div class="col-xs-9 pull-left">{{ model.kelas }}</div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-3">Kekuatan</div>
+      <div class="col-xs-9 pull-left">{{ model.power }}</div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-3">Kelamin</div>
+      <div class="col-xs-9 pull-left">{{ model.kelamin }}</div>
+    </div>
+    <br />
+    <button class="btn btn-primary" (click)="submitted = false">Edit</button>
+  </div>
+</div>
+
+<!-- ====================================================  -->
+<div>
+  <form>
+    <!-- ... all of the form ... -->
+  </form>
+</div>
+
+<!-- ====================================================  -->
+<hr />
+<style>
+    .no-style .ng-valid {
+    border-left: 1px  solid #CCC
+  }
+
+    .no-style .ng-invalid {
+    border-left: 1px  solid #CCC
+  }
+</style>
+<div class="no-style" style="margin-left: 4px">
+  <!-- 
+Copyright 2017-2018 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+--></div>
